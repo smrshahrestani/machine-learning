@@ -9,6 +9,7 @@ import numpy as np
 # round 3 decimal points
 round = 3 
 
+# number of clusters
 k = 3
 
 # [(x,y), class]
@@ -28,7 +29,6 @@ point = (3,1)
 
 
 
-
 def assignClassToPoints(array):
     dict = {}
     list = []
@@ -40,7 +40,7 @@ def assignClassToPoints(array):
     return list
 
 
-
+# The Manhattan Distance between set of points to a single point
 def manhatDist(array, point):
     allDist = []
     print(assignClassToPoints(array))
@@ -53,11 +53,9 @@ def manhatDist(array, point):
 
         print(f"{i}. The Manhattan distance between point {val} and point {point} is: {distance}")
 
-    for i, val in enumerate(array):
-        newList = []
 
 
-
+# The Euclidean Distance between set of points to a single point
 def euclidDist(array, point):
     for i, val in enumerate(array):
         val = val[0]
@@ -68,6 +66,31 @@ def euclidDist(array, point):
 
 
 
-manhatDist(array, point)
-print("-----------------------------")
-euclidDist(array, point)
+def entropy(q):
+    entropy = -(q * np.log2(q) + (1-q) * np.log2(1-q))
+    return entropy
+
+
+
+
+
+
+
+
+
+
+
+
+
+# manhatDist(array, point)
+# print("-----------------------------")
+# euclidDist(array, point)
+
+euclidDist([
+    [(1,2)],
+    [(2,1)],
+    [(3,2)],
+    [(4,2)],
+],
+    (1,1)
+)
