@@ -1,44 +1,75 @@
+# @author: Seyed Mohammad Reza Shahrestani
+# @Date: 27/05/2022
 
-
-#  hello
-
-from dis import dis
-from re import L
-from joblib import PrintTime
 import numpy as np
-from regex import R, W
-
-
-
 
 # The Manhattan Distance between set of points to a single point
-def manhatDist(array, point):
-    print("----Manhattan Distance----")
+def manhatDist(array, point, print_time=False):
+    list = []
+    if print_time: 
+        print("----Manhattan Distance----")
     for i, val in enumerate(array):
         val = val[0]
         distance = abs(val[0] - point[0]) + abs(val[1] - point[1])
         distance = np.round(distance, round)
-        print(f"{i}. The Manhattan distance between point {val} and point {point} is: {distance}")
+        list.append(distance)
+        if print_time: 
+            print(f"{i}. The Manhattan distance between point {val} and point {point} is: {distance}")
     
-    print("================================")
-    
-
-
+    if print_time: 
+        print("================================")
+    return(list)
 
 # The Euclidean Distance between set of points to a single point
-def euclidDist(array, point):
-    print("----Euclidean Distance----")
+def euclidDist(array, point, print_time=False):
+    list = []
+    if print_time:
+        print("----Euclidean Distance----")
     for i, val in enumerate(array):
         val = val[0]
         distance = np.power(val[0] - point[0], 2) + np.power(val[1] - point[1], 2)
         distance = np.sqrt(distance)
         distance = np.round(distance, round)
-        print(f"{i}. The Euclidean distance between point {val} and point {point} is: {distance}")
-    
-    print("================================")
+        list.append(distance)
+        if print_time:
+            print(f"{i}. The Euclidean distance between point {val} and point {point} is: {distance}")
+    if print_time:
+        print("================================")
+    return list
 
+# The Manhattan Distance between 2 set of points
+def man_distance(array, points, print_time=True):
+    if print_time: 
+        print("----Manhattan Distance----")
+    manhattan_list = []
+    count = 0
+    for i, point in enumerate(points):
+        manhattan_list.append(manhatDist(array, point))
 
+    for i, man in enumerate(manhattan_list):
+        for j, x in enumerate(man):
+            count += 1
+            if print_time:
+                print(f"{count}. The Manhattan distance between point {array[j][0]} and point {points[i]} is: {x}")
+    if print_time:
+        print("================================")
 
+# The Euclidean Distance between 2 set of points
+def euc_distance(array, points, print_time=True):
+    if print_time:
+        print("----Euclidean Distance----")
+    euclidean_list = []
+    count = 0
+    for i, point in enumerate(points):
+        euclidean_list.append(euclidDist(array, point))
+
+    for i, man in enumerate(euclidean_list):
+        for j, x in enumerate(man):
+            count += 1
+            if print_time:
+                print(f"{count}. The Euclidean distance between point {array[j][0]} and point {points[i]} is: {x}")
+    if print_time:
+        print("================================")
 
 def entropy(q):
     entropy = -(q * np.log2(q) + (1-q) * np.log2(1-q))
@@ -91,7 +122,8 @@ def update_iteration(number_of_iterations, training_points, w0, w1, learning_rat
     return w0_new, w1_new
 
 
-
+# print settings
+# 
 
 # round 3 decimal points
 round = 3 
@@ -108,16 +140,12 @@ training_points = [
 w0 = 0
 w1 = 0
 learning_rate = 0.01
-number_of_iterations = 3
+number_of_iterations = 2
 update_iteration(number_of_iterations,training_points,w0, w1,learning_rate)
-
-
-
 
 
 # Distances from a set of points to a single point
 # KNN - not ready
-
 # number of clusters
 k = 3
 
@@ -136,9 +164,9 @@ array = [
 
 point = (3,1)
 
-manhatDist(array, point)
+# manhatDist(array, point, True)
 
-euclidDist(array, point)
+# euclidDist(array, point, True)
 
 # euclidDist([
 #     [(1,2)],
@@ -147,8 +175,13 @@ euclidDist(array, point)
 #     [(4,2)],
 # ],
 #     (1,1)
-# )
+# ,True)
 
 
 # Calculate entropy
 # print(entropy(0.3))
+    
+
+man_distance(array, [(2,1), (2,3),(12,32),(1,3)])
+# euc_distance(array, training_points)
+# manhatDist(array, (2,3), True)
