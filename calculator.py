@@ -9,7 +9,8 @@ def manhatDist(array, point, print_time=False):
     if print_time: 
         print("----Manhattan Distance----")
     for i, val in enumerate(array):
-        val = val[0]
+        if isinstance(val, type(list)):
+            val = val[0]
         distance = abs(val[0] - point[0]) + abs(val[1] - point[1])
         distance = np.round(distance, round)
         list.append(distance)
@@ -26,7 +27,8 @@ def euclidDist(array, point, print_time=False):
     if print_time:
         print("----Euclidean Distance----")
     for i, val in enumerate(array):
-        val = val[0]
+        if isinstance(val, type(list)):
+            val = val[0]
         distance = np.power(val[0] - point[0], 2) + np.power(val[1] - point[1], 2)
         distance = np.sqrt(distance)
         distance = np.round(distance, round)
@@ -50,7 +52,10 @@ def man_distance(array, points, print_time=True):
         for j, x in enumerate(man):
             count += 1
             if print_time:
-                print(f"{count}. The Manhattan distance between point {array[j][0]} and point {points[i]} is: {x}")
+                if isinstance(array[i], type(manhattan_list)):
+                    point_x = array[j][0]
+                else: point_x = array[j]
+                print(f"{count}. The Manhattan distance between point {point_x} and point {points[i]} is: {x}")
     if print_time:
         print("================================")
 
@@ -67,7 +72,10 @@ def euc_distance(array, points, print_time=True):
         for j, x in enumerate(man):
             count += 1
             if print_time:
-                print(f"{count}. The Euclidean distance between point {array[j][0]} and point {points[i]} is: {x}")
+                if isinstance(array[i], type(euclidean_list)):
+                    point_x = array[j][0]
+                else: point_x = array[j]
+                print(f"{count}. The Euclidean distance between point {point_x} and point {points[i]} is: {x}")
     if print_time:
         print("================================")
 
@@ -182,6 +190,28 @@ point = (3,1)
 # print(entropy(0.3))
     
 
-man_distance(array, [(2,1), (2,3),(12,32),(1,3)])
+# man_distance(array, [(2,1), (2,3),(12,32),(1,3)])
 # euc_distance(array, training_points)
 # manhatDist(array, (2,3), True)
+
+
+
+
+
+new = [
+    (5,8),
+    (6,7),
+    (6,4),
+    (5,7),
+    (5, 5),
+    (6, 5),
+    (1, 7),
+    (7, 5),
+    (6, 5),
+    (6, 7),
+]
+
+man_distance(new,[(7, 5), (9, 7) , (9, 1)])
+# euc_distance(new, training_points)
+
+
