@@ -2,6 +2,7 @@
 # @Date: 27/05/2022
 
 import numpy as np
+from regex import P
 
 # The Manhattan Distance between set of points to a single point
 def manhatDist(array, point, print_time=False):
@@ -129,6 +130,31 @@ def update_iteration(number_of_iterations, training_points, w0, w1, learning_rat
     print("================================")
     return w0_new, w1_new
 
+vector1 = [1,2,3]
+vector2 = [4,5,6]
+vector = [vector1, vector2]
+
+# input: [[1,2,3,...], [4,5,6,...], ...]
+def dot_product(vector, print_time= True):
+    if print_time:
+        print("----Dot Product----")
+    dot_product = []
+    for j in range(len(vector[0])):
+        col = []
+        for i in range(len(vector)):
+            col.append(vector[i][j])
+        prod_col = np.prod(col)
+        dot_product.append(prod_col)
+    sum_dot_product = np.sum(dot_product)
+    
+    if print_time:
+        print(f"input vector: {vector}, => dot product = {sum_dot_product}")
+        print("================================")
+    return sum_dot_product
+
+    
+dot_product(vector)
+dot_product([[1,2,3],[4,2,3]])
 
 # print settings
 # 
@@ -193,9 +219,6 @@ point = (3,1)
 # man_distance(array, [(2,1), (2,3),(12,32),(1,3)])
 # euc_distance(array, training_points)
 # manhatDist(array, (2,3), True)
-
-
-
 
 
 new = [
